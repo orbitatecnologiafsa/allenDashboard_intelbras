@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/allenbot_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/reservas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <title>AllenBot</title>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+</head>
+
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>AllenBot</h1>
+            </div>
+            <nav class="nav">
+                <p id="user-logged">Logado em:<span id="user-name"></span> </p>
+            </nav>
+        </div>
+    </header>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="../img/allenbotnoname_logo.png" alt="">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="./main_screen.html">
+                    <i class="fas fa-users"></i>
+                    <span>Moradores</span>
+                </a>
+            </li>
+            <li>
+                <a href="./delivery.html">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <span>Delivery</span>
+                </a>
+            </li>
+            <li>
+                <a href="./encomendas.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Encomendas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./cadastros_pendentes.html">
+                    <i class="fas fa-pen-alt"></i>
+                    <span>Cadastros pendentes</span>
+                </a>
+            </li>
+            <li>
+                <a href="./ata.html">
+                    <!-- porteiro -->
+                    <i class="fas fa-user-tie"></i>
+                    <span>Ocorrencia</span>
+                </a>
+            </li>
+            <li id="active">
+                <a href="./reservas.html">
+                    <i class="fas fa-calendar" style="color: #821A4D;"></i>
+                    <span style="color: #821A4D;">Reservas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./configuracao.html">
+                    <i class="fas fa-gear"></i>
+                    <span>Configuração</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn_deslogar">
+                    <i class="fas fa-sign-out""></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <main>
+        <div id="calendar">
+    </div>
+    <div class="box-header">
+        <div class="status">
+            <div class="bolinha fix"></div>
+            <p>Manutenção</p>
+        </div>
+        <div class="status">
+            <div class="bolinha res"></div>
+            <p>Reserva Confirmada</p>
+        </div>
+        <div class="status">
+            <div class="bolinha pag"></div>
+            <p>Aguardando Pagamento</p>
+        </div>
+        <div class="status">
+            <div class="bolinha evt"></div>
+            <p>Evento</p>
+        </div>
+    </div>
+    </main>
+    <div id="eventModal" class="modal1">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="eventTitle"></h2>
+            <p id="eventDetails"></p>
+        </div>
+    </div>
+    <script type="module" src="../js/firebase_config.js"></script>
+    <script type="module" src="../js/reservas.js"></script>
+    <script type="module" src="../js/mostrar_nome.js"></script>
+</body>
+
+</html>

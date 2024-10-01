@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./src/css/style.css">
+    <link rel="shortcut icon" href="./src/img/allenbot_logo.png" type="image/x-icon">
+    <title>AllenBot</title>
+</head>
+<body>
+   
+    <section class="container" id="main">
+        <div class="login left">
+            <h1>Login</h1>
+            <form id="loginForm" action="/submit_form" class="form-login">
+                <div class="input-login">
+                    <div>
+                        <label for="email_login">Email:</label>
+                        <input type="email" name="email" id="email_login" placeholder="Digite seu email..." autocomplete="off">
+                    </div>
+                    <div>
+                        <label for="password_login">Senha:</label>
+                        <div class="input-password">
+                            <input type="password" name="password" id="password_login" placeholder="Digite sua senha..." autocomplete="off">
+                            <img src="./src/img/closed_eye.png" id = "olhinhos-azuis" alt="" onclick="showPassword()">
+                        </div>
+                    </div>
+                    <p>Esqueceu a senha?</p>
+                </div>
+                <button type="submit" id="btn-login">Entrar</button>
+            </form>
+        </div>
+        <div class="sign-in right">
+            <h1>Seja bem-vindo ao <span>AllenBot!</span></h1>
+            <img src="./src/img/allenbot_logo.png" alt="">
+        </div>     
+    </section>
+    <script type="module" src="./src/js/verificar_user.js"></script>
+    <script src="./src/js/script.js"></script>
+</body>
+</html>

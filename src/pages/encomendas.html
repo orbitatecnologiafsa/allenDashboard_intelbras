@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/encomendas.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="../img/allenbot_logo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <title>AllenBot</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>AllenBot</h1>
+            </div>
+            <form id="search_form">
+                <input type="search" id="search" placeholder="Pesquisar..." autocomplete="off">
+                <button id="btn_search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <nav class="nav">
+                <p id="user-logged">Logado em:<span id="user-name"></span> </p>
+            </nav>
+        </div>
+    </header>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="../img/allenbotnoname_logo.png" alt="">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="./main_screen.html">
+                    <i class="fas fa-users"></i>
+                    <span>Moradores</span>
+                </a>
+            </li>
+            <li>
+                <a href="./delivery.html">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <span>Delivery</span>
+                </a>
+            </li>
+            <li id="active">
+                <a href="./encomendas.html">
+                    <i class="fas fa-truck" style="color: #821A4D;"></i>
+                    <span style="color: #821A4D;">Encomendas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./cadastros_pendentes.html">
+                    <i class="fas fa-pen-alt"></i>
+                    <span>Cadastros pendentes</span>
+                </a>
+            </li>
+            <li>
+                <a href="./ata.html">
+                    <!-- porteiro -->
+                    <i class="fas fa-user-tie"></i>
+                    <span>Ocorrencia</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reservas.html">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reservas</span>
+                </a>
+             </li>
+            <li>
+                <a href="./configuracao.html">
+                    <i class="fas fa-gear"></i>
+                    <span>Configuração</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn_deslogar">
+                    <i class="fas fa-sign-out""></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section>
+        <div class="encomendas-container">
+            <div class="encomendas-header">
+                <div class="header-left">
+                    <div class="header-left-p">
+                        <p>Pendentes</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-right-p">
+                        <p>Entregues</p>
+                    </div>
+                </div>
+            </div>
+            <div class="encomendas-body">
+                <div class="encomendas-body-pendentes">
+                    <div class="pendentes-title">
+                        <p>Destinatários</p>
+                        <p>Casa</p>
+                        <p class="discriminacao">Discriminação</p>
+                        <p>Recebido</p>
+                        <p><i class="fa-solid fa-qrcode"></i></p>
+                    </div>
+                    <ul class="pendentes-ul" id="pendentes-ul">
+                    </ul>
+                    <button id="btn_adicionar_encomenda"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="encomendas-body-entregues">
+                    <div class="entregues-title">
+                        <p id="destinatario">Destinatários</p>
+                        <p id="casa">Casa</p>
+                        <p class="discriminacao">Discriminação</p>
+                        <p id="recebido">Recebido</p>
+                        <p id="entregue">Entregue</p>
+                    </div>
+                    <ul class="entregues-ul">
+    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="popup">
+        <i class="fas fa-times" id="close-icon"></i>
+        <div class="popup-content">
+            <div class="popup-header">
+                <h1>Adicionar Encomenda</h1>
+            </div>
+            <div class="popup-body">
+                <form id="form_encomenda">
+                    <label for="destinatario">Destinatário</label>
+                    <input type="text" id="destinatario_input" autocomplete="off" required>
+                    <label for="casa">Casa</label>
+                    <input type="text" id="casa_input" autocomplete="off" readonly required>
+                    <label for="discriminacao">Discriminação</label>
+                    <textarea name="discriminacao" id="discriminacao_input" required></textarea>
+                    <label for="recebido">Recebido</label>
+                    <input type="datetime-local" id="recebido_input" required>
+                    <button id="btn_salvar_encomenda" type="submit">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="popup-morador">
+        <i class="fas fa-times" id="close-icon-morador"></i>
+        <div class="popup-content-morador">
+            <div class="popup-header-morador">
+                <h1>Selecionar morador</h1>
+            </div>
+            <div class="popup-search-morador">
+                <input type="search" id="search_morador" placeholder="Pesquisar..." autocomplete="off">
+            </div>
+            <div class="popup-body-morador">
+                <ul class="morador-ul" id="morador-ul">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="popup-qrcode">
+        <i class="fas fa-times" id="close-icon-qrcode"></i>
+        <div class="popup-content-qrcode">
+            <div class="popup-header-qrcode">
+                <h1>QR Code</h1>
+            </div>
+            <div class="popup-body-qrcode">
+                <img src="" alt="" id="qrCode">
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="../js/encomendas.js"></script>
+    <script type="module" src="../js/mostrar_nome.js"></script>
+    <script type="module" src="../js/deslogar.js"></script>
+</body>
+</html>

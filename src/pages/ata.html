@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../img/allenbot_logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="../css/ata.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <title>AllenBot</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>AllenBot</h1>
+            </div>
+            <nav class="nav">
+                <p id="user-logged">Logado em:<span id="user-name"></span> </p>
+            </nav>
+        </div>
+    </header>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="../img/allenbotnoname_logo.png" alt="">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="./main_screen.html">
+                    <i class="fas fa-users"></i>
+                    <span>Moradores</span>
+                </a>
+            </li>
+            <li>
+                <a href="./delivery.html">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <span>Delivery</span>
+                </a>
+            </li>
+            <li>
+                <a href="./encomendas.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Encomendas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./cadastros_pendentes.html">
+                    <i class="fas fa-pen-alt"></i>
+                    <span>Cadastros pendentes</span>
+                </a>
+            </li>
+            <li id="active">
+                <a href="./ata.html">
+                    <!-- porteiro -->
+                    <i class="fas fa-user-tie" style="color: #821A4D;"></i>
+                    <span style="color: #821A4D;">Ocorrencia</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reservas.html">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reservas</span>
+                </a>
+             </li>
+            <li >
+                <a href="./configuracao.html">
+                    <i class="fas fa-gear"></i>
+                    <span>Configuração</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn_deslogar">
+                    <i class="fas fa-sign-out""></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section>
+        <div class="ata-content">
+            <div class="ata-header">
+                <div class="header-left">
+                    <div class="header-left-p">
+                        <p>Escrever Ocorrencia</p>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-right-p">
+                        <p>FeedBack Ocorrencia</p>
+                    </div>
+                </div>
+            </div>
+            <div class="ata-body">
+                <div class="body-left">
+                    <form id="ata-form">
+                        <div class="nome-data-turno">
+                            <div class="nome_porteiro">
+                                <label for="nome_porteiro">Nome do Porteiro:</label>
+                                <input type="text" id="nome_porteiro" required>
+                            </div>
+                            <div class="data-porteiro">
+                                <label for="data">Data do ocorrido:</label>
+                                <input type="datetime-local" id="data_ocorrido" required>
+                            </div>
+                            <div class="turno-porteiro">
+                                <label for="turno">Turno:</label>
+                                <select name="turno" id="turno" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="manha">Manha</option>
+                                    <option value="tarde">Tarde</option>
+                                    <option value="noite">Noite</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="ata-texto">
+                            <label for="texto_ata">Texto da Ocorrencia:</label>
+                            <textarea name="texto_ata" id="texto_ata" required></textarea>
+                        </div>
+                        <div class="ata-select">
+                            <label for="problema">Há algum problema a ser resolvido?</label>
+                            <select name="problema" id="problema" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="Sim">Sim</option>
+                                <option value="Não">Não</option>
+                            </select>
+                        </div>
+                        <button id="enviar_botao" type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+                    </form> 
+                </div>
+                <div class="body-right">
+                    <ul class="feedback-ul" id="feedback-ul">
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="popup">
+        <i class="fas fa-times" id="close-icon"></i>
+        <div class="popup-content">
+            <div class="popup-header">
+                <h1>Ocorrencia</h1>
+            </div>
+            <div class="popup-body">
+                <div class="nome-data-turno_popup">
+                    <div class="nome_porteiro_popup">
+                        <label for="nome_porteiro">Nome do Porteiro:</label>
+                        <p id="nome_porteiro_popup"></p>
+                    </div>
+                    <div class="data-porteiro_popup">
+                        <label for="data">Data do ocorrido:</label>
+                        <p id="data_popup"></p>
+                    </div>
+                    <div class="turno-porteiro_popup">
+                        <label for="turno">Turno:</label>
+                        <p id="turno_popup"></p>
+                    </div>
+                </div>
+                <div class="ata-texto_popup">
+                    <label for="texto_ata">Texto da Ocorrencia:</label>
+                    <textarea name="texto_ata" id="texto_ata_popup" readonly></textarea>
+                </div>
+                <div class="ata-select_popup">
+                    <label for="problema">Há algum problema a ser resolvido?</label>
+                    <p id="problema_popup"></p>
+                </div>
+                <div class="ata-status_popup">
+                    <label for="problema">Status:</label>
+                    <p id="status_popup"></p>
+                </div>
+                <div class="ata-feedback_popup">
+                    <label for="problema">Feedback:</label>
+                    <p id="feedback_popup"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="../js/ata.js"></script>
+    <script type="module" src="../js/deslogar.js"></script>
+    <script type="module" src="../js/mostrar_nome.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Incluindo a biblioteca Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <p>ASASdASds</p>
+    <button id="enviar" type="button">Enviar</button>
+    <script>
+        let controller;
+
+        document.getElementById('enviar').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            // Abort any ongoing requests
+            if (controller) {
+                controller.abort();
+            }
+
+            // Create a new controller
+            controller = new AbortController();
+            const signal = controller.signal;
+
+            try {
+                const response = await axios.post(`http://192.168.0.108:8080/cadastrar`, {
+                    ip: "192.168.0.128",
+                    morador_nome: 'teste',
+                    foto: "https://firebasestorage.googleapis.com/v0/b/allenbot2.appspot.com/o/321123%2Fvitel123%40gmail.com?alt=media&token=08a306f7-9ea4-4f44-bdab-ac88b79d6495"
+                }, {
+                    signal: signal, // Passando o signal para a requisição Axios
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                console.log(`Cadastro enviado com sucesso. Resposta: ${response.data}`);
+            } catch (error) {
+                if (error.name === 'AbortError') {
+                    console.log('Requisição cancelada');
+                } else if (error.response) {
+                    console.error(`Falha ao enviar cadastro. Status: ${error.response.status}. Resposta: ${error.response.data}`);
+                } else {
+                    console.error('Erro na requisição:', error.message);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

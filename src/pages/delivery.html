@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/delivery.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="../img/allenbot_logo.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <title>AllenBot</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>AllenBot</h1>
+            </div>
+            <form id="search_form">
+                <input type="search" id="search" placeholder="Pesquisar..." autocomplete="off">
+                <button id="btn_search" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+            <nav class="nav">
+                <p id="user-logged">Logado em:<span id="user-name"></span> </p>
+            </nav>
+        </div>
+    </header>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="../img/allenbotnoname_logo.png" alt="">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="./main_screen.html">
+                    <i class="fas fa-users"></i>
+                    <span>Moradores</span>
+                </a>
+            </li>
+            <li id="active">
+                <a href="./delivery.html">
+                    <i class="fa-solid fa-motorcycle" style="color: #821A4D;"></i>
+                    <span style="color: #821A4D;">Delivery</span>
+                </a>
+            </li>
+            <li>
+                <a href="./encomendas.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Encomendas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./cadastros_pendentes.html">
+                    <i class="fas fa-pen-alt"></i>
+                    <span>Cadastros pendentes</span>
+                </a>
+            </li>
+            <li>
+                <a href="./ata.html">
+                    <!-- porteiro -->
+                    <i class="fas fa-user-tie"></i>
+                    <span>Ocorrencia</span>
+                </a>
+            </li> 
+            <li>
+                <a href="./reservas.html">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reservas</span>
+                </a>
+             </li>            
+            <li>
+                <a href="./configuracao.html">
+                    <i class="fas fa-gear"></i>
+                    <span>Configuração</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn_deslogar">
+                    <i class="fas fa-sign-out""></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- pesquisa -->
+    <section class="user-container">
+        <div class="user-div-title">
+            <h1>Pedidos de Delivery</h1>
+        </div>
+        <div class="user-grid">
+            <div class="user-grid-item">Nome</div>
+            <div class="user-grid-item">Casa</div>
+            <div class="user-grid-item">Estabelecimento</div>
+            <div class="user-grid-item">Codigo</div>
+            <div class="user-grid-item">Chegou a entrega?</div>
+        </div>
+        <div class="container">
+            <ul class="user-list" id="moradorLista">
+
+            </ul>
+        </div>
+    </section>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="module" src="../js/delivery.js"></script>
+    <script type="module" src="../js/mostrar_nome.js"></script>
+    <script type="module" src="../js/deslogar.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/configuracao.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <link rel="shortcut icon" href="../img/allenbot_logo.png" type="image/x-icon">
+    <title>AllenBot</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>AllenBot</h1>
+            </div>
+            <nav class="nav">
+                <p id="user-logged">Logado em:<span id="user-name"></span> </p>
+            </nav>
+        </div>
+    </header>
+    <div id="sidebar">
+        <div id="logo">
+            <img src="../img/allenbotnoname_logo.png" alt="">
+        </div>
+        <ul class="menu">
+            <li>
+                <a href="./main_screen.html">
+                    <i class="fas fa-users"></i>
+                    <span>Moradores</span>
+                </a>
+            </li>
+            <li>
+                <a href="./delivery.html">
+                    <i class="fa-solid fa-motorcycle"></i>
+                    <span>Delivery</span>
+                </a>
+            </li>
+            <li>
+                <a href="./encomendas.html">
+                    <i class="fas fa-truck"></i>
+                    <span>Encomendas</span>
+                </a>
+            </li>
+            <li>
+                <a href="./cadastros_pendentes.html">
+                    <i class="fas fa-pen-alt" ></i>
+                    <span>Cadastros pendentes</span>
+                </a>
+            </li>
+            <li>
+                <a href="./ata.html">
+                    <!-- porteiro -->
+                    <i class="fas fa-user-tie"></i>
+                    <span>Ocorrencia</span>
+                </a>
+            </li>
+            <li>
+                <a href="./reservas.html">
+                    <i class="fas fa-calendar"></i>
+                    <span>Reservas</span>
+                </a>
+             </li>
+            <li id="active">
+                <a href="./configuracao.html">
+                    <i class="fas fa-gear" style="color: #821A4D;"></i>
+                    <span style="color: #821A4D;">Configuração</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" id="btn_deslogar">
+                    <i class="fas fa-sign-out""></i>
+                    <span>Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section id="content">
+        <div class="aparelhos" id="aparelhos">
+            <div class="aparelhos-container">
+                <form id="aparelhos-text">
+                    <h1 class="aparelhos-title">ID-Face</h1>
+                    <p>Por favor, informe a quantidade de leitores faciais</p>
+                    <input type="number" name="aparelhos" id="aparelhos_qnt" placeholder="Ex: 3" required min="1">
+                    <button type="submit" id="btn_confirmar" class="aparelhos-btn">Confirmar</button>
+                </form>
+                <div id="aparelhos-cadastrar-ip" >
+                    <p id="btn_voltar"><i class="fa-solid fa-arrow-left"></i>Voltar para a quantidade de aparelhos</p>
+                    <h1 class="aparelhos-title">ID-Face</h1>
+                    <p>Por favor, informe o IP e identificação do(s) leitores faciais</p>
+                    <ul id="aparelhos-ip">
+
+                    </ul>
+                    <button type="button" id="btn_confirmar_ip" class="aparelhos-btn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+        <div id="content-container">
+            <h1>Configurações do Leitor Intelbrass</h1>
+            <div class="container">
+                <div class="left-c">
+                    <img src="../img/ss-5530-mf-face-lite-frontal.png" alt="id_face.png">
+                </div>
+                <div class="right-c">
+                    <h2 id="title_l">Configurações Leitor</h2>
+                    <div id="form">
+                        <div class="form-group">
+                            <ul id="ips_leitor">
+
+                            </ul>
+                        </div>
+                        <button type="button" id="btn_alterar" type="submit">Aplicar alterações</button>
+                    </div>
+                    <div class="opcoes">
+                        <div class="opcao">
+                            <p>Alterar Configurações</p>
+                            <button type="button" id="btn_confirm_alterar" ><i class="fa-solid fa-pen-to-square" id="i_alterar"></i></button>
+                        </div>
+                        <div class="opcao">
+                            <p>Adicionar mais leitores</p>
+                            <button type="button" id="btn_adicionar"><i class="fa-solid fa-plus" id="i_adicionar"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="module" src="../js/deslogar.js"></script>
+    <script src="../js/mostrar_nome.js" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../js/firebase_config.js" type="module"></script>
+    <script type="module" src="../js//intelbras/cadastro_leitor.js"></script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat';
+}
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+}
+section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.section-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    height: 90%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 15px;
+}
+.form-title{
+    background-color: #c41469;
+    color: white;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    font-weight: bold;
+}
+
+#form-morador{ 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border: 2px solid #c41469;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+.form-group:first-child{
+    margin-top: 20px;
+}
+.form-group{
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.form-group input{
+    width: 100%;
+    height: 40px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: black;
+}
+.form-group input:focus{
+    border: 2px solid #c41469;
+}
+.form-group label{
+    font-weight: bold;
+    color: #c41469;
+}
+
+label[for="select_tipo"]{
+    font-weight: bold;
+    color: #c41469;
+    font-weight: 500;
+    font-size: 16px;
+    margin-right: 5px;
+}
+
+select{
+    width: fit-content;
+    height: 25px;
+    border: 1px solid #c41469;
+    border-radius: 5px;
+    padding: 0 10px;
+    outline: none;
+    font-size: 16px;
+    font-weight: 500;
+    color: #FA7070;
+    cursor: pointer;
+}
+.form-foto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    font-weight: bold;
+    color: #c41469;
+    gap: 10px;
+    width: 80%;
+    justify-content: start;
+}
+#foto{
+    color: #25d366;
+    font-weight: 500;
+    border: none;
+    margin-left: none;
+    padding-left: none;
+    text-align: start;
+}
+
+.form-checkbox{
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+#form-morador button{
+    width: 80%;
+    height: 40px;
+    background: linear-gradient(to right, #821A4D, #c41469);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 1.5s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.form-select-leitor{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 5px;
+    width: 80%;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.checkbox_group{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 80%;
+    margin-bottom: 10px;
+    
+}
+.checkbox-wrapper {
+    display: flex;
+    gap: 10px;
+    font-size: 18px;
+    color: #c41469;
+    width: 100%;
+    font-weight: bold;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.checkbox-wrapper:first-child{
+    margin-top: 10px;
+}

@@ -256,7 +256,7 @@ input[type="search"]::-webkit-search-cancel-button {
     width: 30px;
 }
 
-.foto-morador{
+.moradorFoto{
     width: 80px;
     height: 80px;
     object-fit: cover;

@@ -47,200 +47,90 @@ function formatarCPF(cpf) {
     return moradorCpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
 }
 
-async function mostrarMorador(value) {
 
-    const userEmail = await getEmail();
-    const userDb = await firebase.firestore().collection('condominio');
-    const sindico = await userDb.where('email', '==', userEmail).get();
-    const sindicoData = sindico.docs[0].data();
-    const codigoSindico = sindicoData.cod_Condominio;
-    const moradorRef = await firebase.firestore().collection('moradores');
-    const moradorCond = await moradorRef.where('condominio', '==', codigoSindico).get();
-
-    try {
-
-        if(value != null){
-            const pesquisa_inicial = value;
-            const pesquisa_final = pesquisa_inicial + '\uf8ff';
-
-            const moradores = await moradorRef.where('condominio', '==', codigoSindico).where('nome', '>=', pesquisa_inicial).where('nome', '<=', pesquisa_final).get();
-            listaCompleta.length = 0;
-         
-            moradores.forEach(doc => {
-                console.log(doc.id, '=>', doc.data());
-                const moradorData = doc.data();
-                listaCompleta.push(moradorData);
-                });
-            exibirElementos(listaCompleta, paginaAtual);
-            exibirPaginacao(listaCompleta);
-        } else {
-            listaCompleta.length = 0;
-            moradorCond.forEach(doc => {
-                
-                if(doc.data().status == 'ativo') {
-                    if(doc.data().tipo == 'Com chat'){
-                        const morador = {
-                            nome: doc.data().nome,
-                            cpf: formatarCPF(doc.data().cpf),
-                            casa: doc.data().casa,
-                            tipo: doc.data().tipo,
-                            whatsapp: formatarWhasapp(doc.data().whatsapp),
-                            condominio: doc.data().condominio,
-                            foto: doc.data().foto,
-                            ids: doc.data().ids,
-                            status: doc.data().status
-                        };
-                        listaCompleta.push(morador); 
-                    } else {
-                        const morador = {
-                            nome: doc.data().nome,
-                            casa: doc.data().casa,
-                            tipo: doc.data().tipo,
-                            foto: doc.data().foto,
-                            ids: doc.data().ids,
-                            condominio : doc.data().condominio,
-                            status: doc.data().status
-                        }
-                        listaCompleta.push(morador); 
-                    }
-                    exibirElementos(listaCompleta, paginaAtual);
-                    exibirPaginacao(listaCompleta);
-               
-        }        });
-        
-        }
-   
-    } catch(error) {
-        console.log("A lista está vazia, erro: " + error);
-    }
-}
-
-function exibirElementos(lista, pagina) {
+async function exibirElementos(morador) {
   
-    const startIndex = (pagina - 1) * elementosPorPagina;
-    const endIndex = startIndex + elementosPorPagina;
-  
-    //console.log("Lista:", lista);
-    //.log("startIndex:", startIndex);
-    //console.log("endIndex:", endIndex);
-    const elementosDaPagina = lista.slice(startIndex, endIndex);
-  
-    //console.log("elementos da pagina: ", elementosDaPagina);
-  
+
     const moradorLista = document.getElementById('moradorLista');
     moradorLista.innerHTML = ''; 
   
-    elementosDaPagina.forEach(morador => {
   
-      //console.log(morador);
 
+    const moradorItem = document.createElement('li');
+    moradorItem.setAttribute('id','moradorItem');
+    moradorItem.setAttribute('class','item-list');
+
+
+    const moradorNome = document.createElement('p');
+    moradorNome.setAttribute('class','item');
+    moradorNome.textContent = morador.nome;
+
+    const moradorCasa = document.createElement('p');
+    moradorCasa.setAttribute('class','item');
+    moradorCasa.textContent = morador.casa;
         
-        const moradorItem = document.createElement('li');
-        moradorItem.setAttribute('id','moradorItem');
-        moradorItem.setAttribute('class','item-list');
+    const moradorCPF = document.createElement('p');
+    moradorCPF.setAttribute('class', 'item');
+    moradorCPF.textContent = morador.cpf;
+
+    const moradorWhasapp = document.createElement('p');
+    moradorWhasapp.setAttribute('class','item');
+    moradorWhasapp.textContent = morador.whatsapp;
+
+    const moradorTipo = document.createElement('p');
+    moradorTipo.setAttribute('class','item');
+    moradorTipo.textContent = morador.tipo;
+
+    const imgDiv = document.createElement('div');
+    imgDiv.setAttribute('class','img-div');
+
+    const deleteImg = document.createElement('img');
+    deleteImg.setAttribute('class','icon');
+    deleteImg.setAttribute('id','btn_remover');
+    deleteImg.addEventListener('click', () => {
+        mostrarNotificacao('error',"Porfavor, entre em contato com o sindico","Permissão Insuficiente");
+    })
+    const editImg = document.createElement('img');
+    editImg.setAttribute('class','icon');
+    editImg.setAttribute('id','btn_editar');
+    editImg.addEventListener('click', () => {
+        mostrarNotificacao('error',"Porfavor, entre em contato com o sindico","Permissão Insuficiente");
+    })
+    imgDiv.appendChild(editImg);
+    imgDiv.appendChild(deleteImg);
 
 
-        const moradorNome = document.createElement('p');
-        moradorNome.setAttribute('class','item');
-        moradorNome.textContent = morador.nome;
+    const moradorFoto = document.createElement('img');
+    moradorFoto.setAttribute('class','moradorFoto')
+    const imgDiv2 = document.createElement('div');
+    imgDiv2.setAttribute('class','img-div2')
 
-        const moradorCasa = document.createElement('p');
-        moradorCasa.setAttribute('class','item');
-        moradorCasa.textContent = morador.casa;
-           
-        const moradorCPF = document.createElement('p');
-        moradorCPF.setAttribute('class', 'item');
-        moradorCPF.textContent = morador.cpf;
-  
-        const moradorWhasapp = document.createElement('p');
-        moradorWhasapp.setAttribute('class','item');
-        moradorWhasapp.textContent = morador.whatsapp;
-  
-        const moradorTipo = document.createElement('p');
-        moradorTipo.setAttribute('class','item');
-        moradorTipo.textContent = morador.tipo;
-  
-        const imgDiv = document.createElement('div');
-        imgDiv.setAttribute('class','img-div');
-  
-        const deleteImg = document.createElement('img');
-        deleteImg.setAttribute('class','icon');
-        deleteImg.setAttribute('id','btn_remover');
-        deleteImg.addEventListener('click', () => {
-            mostrarNotificacao('error',"Porfavor, entre em contato com o sindico","Permissão Insuficiente");
-        })
-        const editImg = document.createElement('img');
-        editImg.setAttribute('class','icon');
-        editImg.setAttribute('id','btn_editar');
-        editImg.addEventListener('click', () => {
-            mostrarNotificacao('error',"Porfavor, entre em contato com o sindico","Permissão Insuficiente");
-        })
-        imgDiv.appendChild(editImg);
-        imgDiv.appendChild(deleteImg);
-
-
-        const moradorFoto = document.createElement('img');
-        const imgDiv2 = document.createElement('div');
-        baixarFoto(morador.ids).then(url => {
-           
-            moradorFoto.setAttribute('src', url);
-            moradorFoto.setAttribute('class', 'foto-morador');
-            imgDiv2.setAttribute('class','img-div2');
-            imgDiv2.appendChild(moradorFoto);
-        });
-
-        if(morador.status == 'ativo'){
-            editImg.setAttribute('src','../img/editar.svg');
-            editImg.style.cursor = 'pointer';
-            deleteImg.setAttribute('src','../img/remover.svg');
-            deleteImg.style.cursor = 'pointer';
-            moradorItem.style.backgroundColor = 'white';
-        }
-        moradorItem.appendChild(moradorNome);
-        moradorItem.appendChild(moradorCasa);
-        moradorItem.appendChild(moradorCPF);
-        moradorItem.appendChild(moradorWhasapp);
-        moradorItem.appendChild(moradorTipo);
-        moradorItem.appendChild(imgDiv2);
-        moradorItem.appendChild(imgDiv);
-        moradorLista.appendChild(moradorItem);
-    });
-  }
-
-function exibirPaginacao(lista) {
-    const numeroDePaginas = Math.ceil(lista.length / elementosPorPagina);
-    const paginationContainer = document.getElementById('pagination');
-    paginationContainer.innerHTML = ''; 
-
-    for (let i = 1; i <= numeroDePaginas; i++) {
-        const button = document.createElement('button');
-        button.textContent = i;
-        if (i === 1) { 
-            button.setAttribute('class', 'botao-paginacao ativo');
-        }
-        button.classList.add('botao-paginacao');
-        button.addEventListener('click', () => irParaPagina(i));
-        paginationContainer.appendChild(button);
+    moradorFoto.src = '';
+    let url;
+    try {
+        url = await baixarFoto(morador.email);
+        moradorFoto.src = url;
+        
+    } catch (error) {
+        console.error('Erro ao carregar a foto:', error);
+        moradorFoto.alt = 'Imagem não disponível';
     }
-}
-
-function irParaPagina(pagina) {
-   
-    //console.log("Pagina:", pagina);
-    paginaAtual = pagina;
-    exibirElementos(listaCompleta, pagina);
-    atualizarPaginacao();
-}
-
-function atualizarPaginacao() {
-  const botoesPaginacao = document.querySelectorAll('#pagination button');
-  botoesPaginacao.forEach((botao, indice) => {
-      if (indice + 1 === paginaAtual) {
-          botao.classList.add('ativo');
-      } else {
-          botao.classList.remove('ativo');
-      }
-  });
+    imgDiv2.appendChild(moradorFoto)
+    if(morador.status == 'ativo'){
+        editImg.setAttribute('src','../img/editar.svg');
+        editImg.style.cursor = 'pointer';
+        deleteImg.setAttribute('src','../img/remover.svg');
+        deleteImg.style.cursor = 'pointer';
+        moradorItem.style.backgroundColor = 'white';
+    }
+    moradorItem.appendChild(moradorNome);
+    moradorItem.appendChild(moradorCasa);
+    moradorItem.appendChild(moradorCPF);
+    moradorItem.appendChild(moradorWhasapp);
+    moradorItem.appendChild(moradorTipo);
+    moradorItem.appendChild(imgDiv2);
+    moradorItem.appendChild(imgDiv);
+    moradorLista.appendChild(moradorItem);
 }
 
 async function getIp(){
@@ -251,7 +141,6 @@ async function getIp(){
     const leitoresData = leitores.docs[0];
     const ips = leitoresData.data().ips;
 
-    //console.log(ips);
     return ips;
 }
 
@@ -316,51 +205,53 @@ async function deleteClient(id) {
         }
     }
 }
-async function baixarFoto(user_id) {
 
-    //console.log("DAD:" + user_id);
+async function cod_sindico() {
+    const userEmail = await getEmail();
+    const userDb = await firebase.firestore().collection('condominio');
+    const sindico = await userDb.where('email', '==', userEmail).get();
+    const sindicoData = sindico.docs[0].data();
+    const codigoSindico = sindicoData.cod_Condominio;
+
+    return codigoSindico;
+}
+
+const cod_cond = await cod_sindico()
+async function baixarFoto(email) {
     try {
-        const ips = await getIp();
-
-        for (let i = 0; i < ips.length; i++) {
-            const ip = ips[i];
-            const id_array = user_id[i];
-            //console.log("id_array:" + id_array);
-               
-                try {
-
-                        const conexao = await axios.post(`http://${ip}/login.fcgi`, {
-                            login: 'admin',
-                            password: 'admin'
-                        });
-                    
-                        if (conexao.data.session) {
-                           
-                            const session = conexao.data.session;
-                            console.log('Sessão Foto:', session);
-                            const response = await fetch(`http://${ip}/user_get_image.fcgi?user_id=${id_array}&session=${session}`, {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'image/jpeg'
-                                }
-                            });
-                            const blob = await response.blob();
-                            const url = URL.createObjectURL(blob);
-                
-                            return url;
-                        }
-                    }
-                catch (error) {
-                    console.error(error);
-                }
-        }
+        const storage = await firebase.storage();
+        const path = `${cod_cond}/${email}`;
+        const photoRef = storage.ref(path);
+        const url = await photoRef.getDownloadURL();
+        console.log(url);
+        return url;
     } catch (error) {
-        console.error('Erro ao baixar a foto:', error);
+        console.error("Erro ao baixar a foto, sem url:", error);
     }
 }
 
 showName();
-mostrarMorador(null);
+firebase.firestore().collection("moradores").onSnapshot(async (snapshot) => {
+
+    snapshot.docChanges().forEach((change) => {
+        const moradorData = change.doc.data();
+
+        if ((change.type === "added" || change.type === "modified") && moradorData.status === 'ativo' && moradorData.condominio === cod_cond) {
+            const morador = {
+                nome: moradorData.nome,
+                casa: moradorData.casa,
+                cpf: formatarCPF(moradorData.cpf),
+                whatsapp: formatarWhasapp(moradorData.whatsapp),
+                tipo: moradorData.tipo,
+                email: moradorData.email,
+                ids: change.doc.id,
+                status: moradorData.status,
+                tipo: moradorData.tipo
+            };
+            exibirElementos(morador)
+        }
+    });
+});
 
 document.getElementById('search_form').addEventListener('submit', function(event) {
     event.preventDefault();
